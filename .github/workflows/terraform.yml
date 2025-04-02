@@ -23,6 +23,7 @@ env:
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  SSH_PUB_KEY: ${{ secrets.SSH_PUB_KEY }}
 
 jobs:
   terraform:
@@ -47,11 +48,11 @@ jobs:
 
       - name: Terraform Destroy (clean)
         if: github.event.inputs.clean == 'true'
-        run: terraform destroy -auto-approve -var-file=configs/${{ github.event.inputs.environment }}.tfvars
+        run: terraform destroy -auto-approve -var-file=configs/${{ github.event.inputs.environment }}.tfvars -var 'ssh_pub_key=$SSH_PUB_KEY'
       
       - name: Terraform Plan
-        run: terraform plan -var-file=configs/${{ github.event.inputs.environment }}.tfvars
+        run: terraform plan -var-file=configs/${{ github.event.inputs.environment }}.tfvars -var 'ssh_pub_key=$SSH_PUB_KEY'
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/master' && github.event.inputs.apply == 'true'
-        run: terraform apply -auto-approve -var-file=configs/${{ github.event.inputs.environment }}.tfvars
+        run: terraform apply -auto-approve -var-file=configs/${{ github.event.inputs.environment }}.tfvars -var 'ssh_pub_key=$SSH_PUB_KEY'
