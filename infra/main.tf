@@ -23,6 +23,6 @@ module "vnet" {
   rg_name          = var.rg_name
   subnets          = var.subnets
   prefix           = var.prefix
-  ssh_pub_key_path = var.ssh_pub_key_path
+  ssh_pub_key = var.ssh_pub_key
   tags             = var.tags
 }

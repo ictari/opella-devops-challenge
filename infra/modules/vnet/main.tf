@@ -103,7 +103,7 @@ resource "azurerm_linux_virtual_machine" "web" {
 
   admin_ssh_key {
     username   = "demo.admin"
-    public_key = file(var.ssh_pub_key_path)
+    public_key = var.ssh_pub_key
   }
 
   tags = var.tags
@@ -134,7 +134,7 @@ resource "azurerm_linux_virtual_machine" "data" {
 
   admin_ssh_key {
     username   = "azureuser"
-    public_key = file(var.ssh_pub_key_path)
+    public_key = var.ssh_pub_key_path
   }
 
   tags = var.tags

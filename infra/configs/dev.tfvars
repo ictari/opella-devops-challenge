@@ -20,4 +20,4 @@ tags = {
 }
 
 #local use
-ssh_pub_key_path = "/Users/nickbates/.ssh/id_rsa.pub" 
+ssh_pub_key = file("/Users/nickbates/.ssh/id_rsa.pub")

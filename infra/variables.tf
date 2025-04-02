@@ -25,7 +25,7 @@ variable "prefix" {
   type = string
 }
 
-variable "ssh_pub_key_path" {
+variable "ssh_pub_key" {
   type = string
 }
 
