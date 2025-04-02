@@ -30,10 +30,10 @@ jobs:
           terraform_version: 1.5.7
 
       - name: Terraform Init
-        run: terraform init -backend-config=backend-configs/dev.backend.tfvars
+        run: terraform init -backend-config=configs/backend_dev.tfvars
 
       - name: Terraform Plan
-        run: terraform plan -var-file=env-configs/dev.tfvars
+        run: terraform plan -var-file=configs/dev.tfvars
 
      # - name: Terraform Apply (auto-approved)
      #   if: github.ref == 'refs/heads/main'
