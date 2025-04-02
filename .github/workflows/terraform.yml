@@ -48,11 +48,11 @@ jobs:
 
       - name: Terraform Destroy (clean)
         if: github.event.inputs.clean == 'true'
-        run: terraform destroy -auto-approve -var-file=configs/${{ github.event.inputs.environment }}.tfvars -var 'ssh_pub_key=$SSH_PUB_KEY'
+        run: terraform destroy -auto-approve -var-file=configs/${{ github.event.inputs.environment }}.tfvars
       
       - name: Terraform Plan
-        run: terraform plan -var-file=configs/${{ github.event.inputs.environment }}.tfvars -var 'ssh_pub_key=$SSH_PUB_KEY'
+        run: terraform plan -var-file=configs/${{ github.event.inputs.environment }}.tfvars
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/master' && github.event.inputs.apply == 'true'
-        run: terraform apply -auto-approve -var-file=configs/${{ github.event.inputs.environment }}.tfvars -var 'ssh_pub_key=$SSH_PUB_KEY'
+        run: terraform apply -auto-approve -var-file=configs/${{ github.event.inputs.environment }}.tfvars
