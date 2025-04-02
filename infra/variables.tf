@@ -1,17 +1,17 @@
 variable "vnet_name" {
-  type        = string
+  type = string
 }
 
 variable "address_space" {
-  type        = list(string)
+  type = list(string)
 }
 
 variable "location" {
-  type        = string
+  type = string
 }
 
 variable "rg_name" {
-  type        = string
+  type = string
 }
 
 variable "subnets" {
@@ -22,14 +22,14 @@ variable "subnets" {
 }
 
 variable "prefix" {
-  type        = string
+  type = string
 }
 
 variable "ssh_pub_key_path" {
-  type        = string
+  type = string
 }
 
 variable "tags" {
-  type        = map(string)
-  default     = {}
+  type    = map(string)
+  default = {}
 }

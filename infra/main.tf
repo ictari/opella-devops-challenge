@@ -16,13 +16,13 @@ terraform {
 }
 
 module "vnet" {
-  source            = "./modules/vnet"
-  vnet_name         = var.vnet_name
-  address_space     = var.address_space
-  location          = var.location
-  rg_name           = var.rg_name
-  subnets           = var.subnets
-  prefix            = var.prefix
-  ssh_pub_key_path  = var.ssh_pub_key_path
-  tags              = var.tags
+  source           = "./modules/vnet"
+  vnet_name        = var.vnet_name
+  address_space    = var.address_space
+  location         = var.location
+  rg_name          = var.rg_name
+  subnets          = var.subnets
+  prefix           = var.prefix
+  ssh_pub_key_path = var.ssh_pub_key_path
+  tags             = var.tags
 }

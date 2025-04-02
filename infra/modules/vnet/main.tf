@@ -16,7 +16,7 @@ resource "azurerm_subnet" "sub" {
 }
 
 resource "azurerm_storage_account" "sa" {
-  name                     ="${var.prefix}sa"
+  name                     = "${var.prefix}sa"
   resource_group_name      = var.rg_name
   location                 = var.location
   account_tier             = "Standard"

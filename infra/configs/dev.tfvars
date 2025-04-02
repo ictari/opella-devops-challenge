@@ -1,9 +1,9 @@
-vnet_name           = "dev-vnet"
-address_space       = ["10.0.0.0/16"]
-location            = "westeurope"
-rg_name             = "cst-demo-rg"
-prefix              = "demo"
-ssh_pub_key_path    = "/Users/nickbates/.ssh/id_rsa.pub"
+vnet_name        = "dev-vnet"
+address_space    = ["10.0.0.0/16"]
+location         = "westeurope"
+rg_name          = "cst-demo-rg"
+prefix           = "demo"
+ssh_pub_key_path = "/Users/nickbates/.ssh/id_rsa.pub"
 subnets = [
   {
     name             = "web-sn"
