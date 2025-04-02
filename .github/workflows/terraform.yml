@@ -35,6 +35,6 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -var-file=env-configs/dev.tfvars
 
-      - name: Terraform Apply (auto-approved)
-        if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve -var-file=env-configs/dev.tfvars
+     # - name: Terraform Apply (auto-approved)
+     #   if: github.ref == 'refs/heads/main'
+     #   run: terraform apply -auto-approve -var-file=env-configs/dev.tfvars
