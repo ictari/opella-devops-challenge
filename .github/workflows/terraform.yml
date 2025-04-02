@@ -1,9 +1,14 @@
 name: "Terraform Deploy"
 
 on:
-  push:
-    branches: [master]
+  #push:
+  #  branches: [master]
   workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment"
+        required: true
+        default: "dev"
 
 env:
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
@@ -15,7 +20,8 @@ jobs:
   terraform:
     name: "Terraform Plan + Apply"
     runs-on: ubuntu-latest
-
+    environment: ${{ github.event.inputs.environment }}
+    
     defaults:
       run:
         working-directory: infra
@@ -30,11 +36,11 @@ jobs:
           terraform_version: 1.5.7
 
       - name: Terraform Init
-        run: terraform init -backend-config=configs/backend_dev.tfvars
+        run: terraform init -backend-config=configs/backend_${{ github.event.inputs.environment }}.tfvars
 
       - name: Terraform Plan
-        run: terraform plan -var-file=configs/dev.tfvars
+        run: terraform plan -var-file=configs/${{ github.event.inputs.environment }}.tfvars
 
      # - name: Terraform Apply (auto-approved)
      #   if: github.ref == 'refs/heads/master'
-     #   run: terraform apply -auto-approve -var-file=env-configs/dev.tfvars
+     #   run: terraform apply -auto-approve -var-file=configs/${{ github.event.inputs.environment }}.tfvars
