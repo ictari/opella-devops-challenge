@@ -19,5 +19,4 @@ tags = {
   environment = "dev"
 }
 
-#local use
-ssh_pub_key = file("/Users/nickbates/.ssh/id_rsa.pub")
+ssh_pub_key = "ssh-rsa INSERT PUB KEY HERE"

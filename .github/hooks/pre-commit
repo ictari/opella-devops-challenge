@@ -1,0 +1,15 @@
+#!/bin/bash
+
+PATTERN="#NO_CHECKIN"
+
+if git diff --cached --name-only | grep -E '\.tfvars$' | while read file; do
+  if grep -qF "$PATTERN" "$file"; then
+    echo "❌ Commit blocked: Found '$PATTERN' in $file"
+    exit 1
+  fi
+done
+then
+  exit 1
+fi
+
+exit 0
