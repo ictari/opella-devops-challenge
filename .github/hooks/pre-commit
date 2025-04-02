@@ -4,7 +4,7 @@ PATTERN="NO_CHECKIN"
 BLOCKED=0
 
 for file in $(git diff --cached --name-only); do
-  if grep -qF "$PATTERN" "$file"; then
+  if [ -f "$file" ] && grep -qF "$PATTERN" "$file"; then
     echo "❌ Commit blocked: Found '$PATTERN' in $file"
     BLOCKED=1
   fi
