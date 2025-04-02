@@ -13,7 +13,11 @@ on:
         description: "Apply the changes?"
         required: true
         default: "false"
-        
+      clean:
+        description: "Destroy infrastructure first?"
+        required: false
+        default: "false"
+       
 env:
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -41,6 +45,10 @@ jobs:
       - name: Terraform Init
         run: terraform init -backend-config=configs/backend_${{ github.event.inputs.environment }}.tfvars
 
+      - name: Terraform Destroy (clean)
+        if: github.event.inputs.clean == 'true'
+        run: terraform destroy -auto-approve -var-file=configs/${{ github.event.inputs.environment }}.tfvars
+      
       - name: Terraform Plan
         run: terraform plan -var-file=configs/${{ github.event.inputs.environment }}.tfvars
 
