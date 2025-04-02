@@ -9,13 +9,16 @@ on:
         description: "Environment"
         required: true
         default: "dev"
-
+      apply:
+        description: "Apply the changes?"
+        required: true
+        default: "false"
+        
 env:
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-  ENV_NAME: ${{ github.event.inputs.environment }}
 
 jobs:
   terraform:
@@ -39,8 +42,8 @@ jobs:
         run: terraform init -backend-config=configs/backend_${{ github.event.inputs.environment }}.tfvars
 
       - name: Terraform Plan
-        run: terraform plan -var-file=configs/${{ env.ENV_NAME }}.tfvars
+        run: terraform plan -var-file=configs/${{ github.event.inputs.environment }}.tfvars
 
-     # - name: Terraform Apply (auto-approved)
-     #   if: github.ref == 'refs/heads/master'
-     #   run: terraform apply -auto-approve -var-file=configs/${{ env.ENV_NAME }}.tfvars
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/master' && github.event.inputs.apply == 'true'
+        run: terraform apply -auto-approve -var-file=configs/${{ github.event.inputs.environment }}.tfvars
