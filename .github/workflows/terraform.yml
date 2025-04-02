@@ -2,7 +2,7 @@ name: "Terraform Deploy"
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 env:
@@ -36,5 +36,5 @@ jobs:
         run: terraform plan -var-file=configs/dev.tfvars
 
      # - name: Terraform Apply (auto-approved)
-     #   if: github.ref == 'refs/heads/main'
+     #   if: github.ref == 'refs/heads/master'
      #   run: terraform apply -auto-approve -var-file=env-configs/dev.tfvars
